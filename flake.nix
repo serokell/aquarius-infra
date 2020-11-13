@@ -23,7 +23,7 @@
 
   outputs = { self, nixpkgs, serokell-nix, deploy-rs, ... }@inputs:
     let
-      inherit (nixpkgs.lib) nixosSystem filterAttrs const;
+      inherit (nixpkgs.lib) nixosSystem filterAttrs const recursiveUpdate;
       inherit (builtins) readDir mapAttrs;
       system = "x86_64-linux";
       servers = mapAttrs (path: _: import (./servers + "/${path}"))
@@ -75,6 +75,6 @@
             [ deploy (terraformFor nixpkgs.legacyPackages.${system}) ];
         }) deploy-rs.defaultPackage;
 
-      checks = deployChecks // checks;
+      checks = recursiveUpdate deployChecks checks;
     };
 }
