@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+set +e # sorry Chris
+# https://github.com/mikeknox/vault-secrets-buildkite-plugin, but secure
+
+list_secrets() {
+    vault kv list -format=json "buildkite/$1" | jq -r '.[]'
+}
+vault_auth() {
+    local vaultOutput
+    vaultOutput=$(vault write -format=json auth/approle/login role_id="$BUILDKITE_PLUGIN_VAULT_SECRETS_ROLE_ID" secret_id=- <<< "$BUILDKITE_PLUGIN_VAULT_SECRETS_SECRET_ID")
+    jq '.auth.client_token = "redacted"' <<< "$vaultOutput"
+    export VAULT_TOKEN
+    VAULT_TOKEN=$(jq -r '.auth.client_token' <<< "$vaultOutput")
+}
+processEnvSecrets() {
+    local envKey="$1"
+    local envscript=''
+    local key_json=""
+
+    key_json=$(vault kv get -format=json "buildkite/$envKey/environment")
+    if ! builtin [ -z "$key_json" ]; then
+        envscript=$(builtin echo "$key_json" | jq -r '.data.data | to_entries[] | "export \(.key)=\"\(.value)\""')
+        echo "Found environment at ${envKey}/environment (${#envscript} bytes)" >&2
+        eval "$envscript"
+    fi
+}
+processSshSecrets() {
+    local envKey="$1"
+    local ssh_key
+    ssh_key=$(vault kv get -field=value "buildkite/$envKey/private_ssh_key" | base64 -d)
+    if ! builtin [ -z "$ssh_key" ]; then
+        echo "Found ssh key at ${envKey}/private_ssh_key (${#ssh_key} bytes)" >&2
+        ssh-keygen -yf <(builtin echo "$ssh_key") | ssh-keygen -lf-
+        add_ssh_private_key_to_agent "$ssh_key"
+    fi
+    # TODO: make sure there's at least 1?
+}
+
+dumpEnvSecrets() {
+  if [[ "${BUILDKITE_PLUGIN_VAULT_SECRETS_DUMP_ENV:-}" =~ ^(true|1)$ ]] ; then
+    echo "~~~ Environment variables that were set" >&2;
+    comm -13 <(echo "$env_before") <(env | sort) || true
+  fi
+}
+
+add_ssh_private_key_to_agent() {
+  local ssh_key="$1"
+
+  if [[ -z "${SSH_AGENT_PID:-}" ]] ; then
+    echo "Starting an ephemeral ssh-agent" >&2;
+    eval "$(ssh-agent -s)"
+  fi
+
+  echo "Loading ssh-key into ssh-agent (pid ${SSH_AGENT_PID:-})" >&2;
+  builtin echo "$ssh_key" | env SSH_ASKPASS="$(command -v false)" ssh-add -
+}
+
+if builtin [ -z "${VAULT_ADDR}" ]; then
+    echo "missing VAULT_ADDR" >&2;
+    echo "Please configure vault access" >&2;
+    exit 1
+fi
+
+if builtin [ -z "${BUILDKITE_PLUGIN_VAULT_SECRETS_ROLE_ID}" ]; then
+    echo "missing BUILDKITE_PLUGIN_VAULT_SECRETS_ROLE_ID" >&2;
+    echo "refer to https://www.vaultproject.io/docs/auth/approle/" >&2;
+    exit 1
+fi
+
+if builtin [ -z "${BUILDKITE_PLUGIN_VAULT_SECRETS_SECRET_ID}" ]; then
+    echo "missing BUILDKITE_PLUGIN_VAULT_SECRETS_SECRET_ID" >&2
+    echo "refer to https://www.vaultproject.io/docs/auth/approle/" >&2
+    exit 1
+fi
+
+if builtin [ -z "${BUILDKITE_PIPELINE_SLUG}" ]; then
+    echo "missing BUILDKITE_PIPELINE_SLUG" >&2;
+    echo "are you running this in buildkite?" >&2;
+    exit 1
+fi
+
+if builtin [ -z "${BUILDKITE_ORGANIZATION_SLUG}" ]; then
+    echo "missing BUILDKITE_ORGANIZATION_SLUG" >&2;
+    echo "are you running this in buildkite?" >&2;
+    exit 1
+fi
+
+env_before="$(env | sort)"  # used by dumpEnvSecrets
+
+echo "~~~ Authenticating to :vault: $VAULT_ADDR" >&2;
+vault_auth
+function cleanup()
+{
+    vault token revoke -self
+    unset VAULT_TOKEN
+    #eval "$(ssh-agent -k)"
+    # not sure if buildkite-agent will get the values if unset
+    export BUILDKITE_PLUGIN_VAULT_SECRETS_ROLE_ID=redacted
+    export BUILDKITE_PLUGIN_VAULT_SECRETS_SECRET_ID=redacted
+}
+trap cleanup EXIT
+echo "~~~ Downloading secrets from :vault: $VAULT_ADDR" >&2;
+
+for secret in "$BUILDKITE_ORGANIZATION_SLUG/"{'*',"$BUILDKITE_PIPELINE_SLUG"}; do
+    processEnvSecrets "$secret"
+    processSshSecrets "$secret"
+done
+
+# First clean up VAULT_TOKEN, then dump env secrets
+cleanup
+trap - EXIT
+
+dumpEnvSecrets
