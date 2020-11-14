@@ -70,15 +70,15 @@
       }) self.nixosConfigurations;
 
       devShell = mapAttrs (system: deploy:
-        nixpkgs.legacyPackages.${system}.mkShell {
-          buildInputs =
-            let pkgs' = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
-            in [
-              deploy
-              (terraformFor pkgs')
-              pkgs'.nixUnstable
-            ];
-        }) deploy-rs.defaultPackage;
+        let pkgs = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
+        in pkgs.mkShell {
+            buildInputs =
+              [
+                deploy
+                (terraformFor pkgs)
+                pkgs.nixUnstable
+              ];
+          }) deploy-rs.defaultPackage;
 
       checks = recursiveUpdate deployChecks checks;
     };
