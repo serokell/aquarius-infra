@@ -76,7 +76,7 @@
             let pkgs' = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
             in [
               deploy
-              (terraformFor nixpkgs.legacyPackages.${system})
+              (terraformFor pkgs')
               pkgs'.nixUnstable
             ];
         }) deploy-rs.defaultPackage;
