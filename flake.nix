@@ -3,11 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:serokell/nixpkgs";
+    nix-unstable.url = "github:nixos/nix";
     serokell-nix = {
       type = "github";
       owner = "serokell";
       repo = "serokell.nix";
-      ref = "mkaito/ops1085-vault-secrets-name-prefix";
+      ref = "notgne2/ops1017-migrate-from-profiles";
     };
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -72,7 +73,11 @@
       devShell = mapAttrs (system: deploy:
         nixpkgs.legacyPackages.${system}.mkShell {
           buildInputs =
-            [ deploy (terraformFor nixpkgs.legacyPackages.${system}) ];
+            [
+              deploy
+              (terraformFor nixpkgs.legacyPackages.${system})
+              inputs.nix-unstable.defaultPackage.${system}
+            ];
         }) deploy-rs.defaultPackage;
 
       checks = recursiveUpdate deployChecks checks;
