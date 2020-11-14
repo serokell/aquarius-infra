@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:serokell/nixpkgs";
-    nix-unstable.url = "github:nixos/nix";
     serokell-nix = {
       type = "github";
       owner = "serokell";
@@ -43,19 +42,20 @@
       terraformFor = pkgs: pkgs.terraform.withPlugins (p: with p; [ aws ]);
 
       checks = mapAttrs (_: pkgs:
-        let pkgs' = pkgs.extend serokell-nix.overlay;
+        let
+          pkgs' = pkgs.extend serokell-nix.overlay;
         in {
-          trailing-whitespace = pkgs'.build.checkTrailingWhitespace ./.;
-          terraform = pkgs.runCommand "terraform-check" {
-            src = ./terraform;
-            buildInputs = [ (terraformFor pkgs) ];
-          } ''
-            cp -r $src ./terraform
-            terraform init -backend=false terraform
-            terraform validate terraform
-            touch $out
-          '';
-        }) nixpkgs.legacyPackages;
+            trailing-whitespace = pkgs'.build.checkTrailingWhitespace ./.;
+            terraform = pkgs.runCommand "terraform-check" {
+              src = ./terraform;
+              buildInputs = [ (terraformFor pkgs) ];
+            } ''
+              cp -r $src ./terraform
+              terraform init -backend=false terraform
+              terraform validate terraform
+              touch $out
+            '';
+          }) nixpkgs.legacyPackages;
     in {
       nixosConfigurations = mapAttrs (const mkSystem) servers;
 
@@ -73,10 +73,11 @@
       devShell = mapAttrs (system: deploy:
         nixpkgs.legacyPackages.${system}.mkShell {
           buildInputs =
-            [
+            let pkgs' = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
+            in [
               deploy
               (terraformFor nixpkgs.legacyPackages.${system})
-              inputs.nix-unstable.defaultPackage.${system}
+              pkgs'.nixUnstable
             ];
         }) deploy-rs.defaultPackage;
 
