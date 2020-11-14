@@ -42,20 +42,19 @@
       terraformFor = pkgs: pkgs.terraform.withPlugins (p: with p; [ aws ]);
 
       checks = mapAttrs (_: pkgs:
-        let
-          pkgs' = pkgs.extend serokell-nix.overlay;
+        let pkgs' = pkgs.extend serokell-nix.overlay;
         in {
-            trailing-whitespace = pkgs'.build.checkTrailingWhitespace ./.;
-            terraform = pkgs.runCommand "terraform-check" {
-              src = ./terraform;
-              buildInputs = [ (terraformFor pkgs) ];
-            } ''
-              cp -r $src ./terraform
-              terraform init -backend=false terraform
-              terraform validate terraform
-              touch $out
-            '';
-          }) nixpkgs.legacyPackages;
+          trailing-whitespace = pkgs'.build.checkTrailingWhitespace ./.;
+          terraform = pkgs.runCommand "terraform-check" {
+            src = ./terraform;
+            buildInputs = [ (terraformFor pkgs) ];
+          } ''
+            cp -r $src ./terraform
+            terraform init -backend=false terraform
+            terraform validate terraform
+            touch $out
+          '';
+        }) nixpkgs.legacyPackages;
     in {
       nixosConfigurations = mapAttrs (const mkSystem) servers;
 
