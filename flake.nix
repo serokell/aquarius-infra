@@ -7,7 +7,7 @@
       type = "github";
       owner = "serokell";
       repo = "serokell.nix";
-      ref = "notgne2/ops1017-migrate-from-profiles";
+      ref = "mkaito/ops1085-vault-secrets-name-prefix";
     };
     flake-compat = {
       url = "github:edolstra/flake-compat";

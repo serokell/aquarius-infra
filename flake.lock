@@ -322,16 +322,16 @@
         "scratch": "scratch"
       },
       "locked": {
-        "lastModified": 1605225785,
-        "narHash": "sha256-UNhMxh+hULhVykeNpDSVoY+vtSLjys9yHmIVrerx9H8=",
+        "lastModified": 1605369863,
+        "narHash": "sha256-OQV6YA2jO5waNYITXHe2fNi3ZL/Puun7CC7ZoRxR9Fo=",
         "owner": "serokell",
         "repo": "serokell.nix",
-        "rev": "401d1ca04f1a027d24c3b8f9eca29a6a37ba70c9",
+        "rev": "d06db5b507e4d6056552b8f468269887a922ab04",
         "type": "github"
       },
       "original": {
         "owner": "serokell",
-        "ref": "notgne2/ops1017-migrate-from-profiles",
+        "ref": "mkaito/ops1085-vault-secrets-name-prefix",
         "repo": "serokell.nix",
         "type": "github"
       }

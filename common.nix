@@ -7,5 +7,6 @@
     vaultPathPrefix = "kv/sys/aquarius";
     vaultAddress = "https://vault.serokell.org:8200";
     namespace = config.networking.hostName;
+    approlePrefix = "aquarius-${config.networking.hostName}";
   };
 }
