@@ -64,6 +64,9 @@
       deploy.nodes = mapAttrs (_: nixosConfig: {
         hostname =
           "${nixosConfig.config.networking.hostName}.${nixosConfig.config.networking.domain}";
+        sshOpts = [ "-p" "17788" ];
+
+        profiles.system.user = "root";
         profiles.system.path = deploy-rs.lib.${system}.setActivate
           nixosConfig.config.system.build.toplevel
           "$PROFILE/bin/switch-to-configuration switch";
