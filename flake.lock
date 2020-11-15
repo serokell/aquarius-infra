@@ -389,11 +389,11 @@
         "scratch": "scratch"
       },
       "locked": {
-        "lastModified": 1605376588,
-        "narHash": "sha256-sQHlAznTGiATAKitwczy4rXsXwTQNfzGJ2DdPZHopLY=",
+        "lastModified": 1605439209,
+        "narHash": "sha256-KUrET2XHzdci/OHL0i2778BQ3/Na0eDmURGCU7hFuxw=",
         "owner": "serokell",
         "repo": "serokell.nix",
-        "rev": "13aed02e1711e1d441435e3b4b3c823b6065a7b9",
+        "rev": "f829502e95addafadabbd6b2f6f99fad75bef629",
         "type": "github"
       },
       "original": {
