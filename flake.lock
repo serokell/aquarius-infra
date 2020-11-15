@@ -389,16 +389,16 @@
         "scratch": "scratch"
       },
       "locked": {
-        "lastModified": 1605439209,
-        "narHash": "sha256-KUrET2XHzdci/OHL0i2778BQ3/Na0eDmURGCU7hFuxw=",
+        "lastModified": 1605441032,
+        "narHash": "sha256-bt/bK+dx6pizoD02ujg1aQPSWzFY9cuN+fHCWUWt01s=",
         "owner": "serokell",
         "repo": "serokell.nix",
-        "rev": "f829502e95addafadabbd6b2f6f99fad75bef629",
+        "rev": "9bddd246269f13b907337097633bafc28e8393ff",
         "type": "github"
       },
       "original": {
         "owner": "serokell",
-        "ref": "notgne2/ops1017-migrate-from-profiles",
+        "ref": "master",
         "repo": "serokell.nix",
         "type": "github"
       }

@@ -7,7 +7,7 @@
       type = "github";
       owner = "serokell";
       repo = "serokell.nix";
-      ref = "notgne2/ops1017-migrate-from-profiles";
+      ref = "master";
     };
     flake-compat = {
       url = "github:edolstra/flake-compat";

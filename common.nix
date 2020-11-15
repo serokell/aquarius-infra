@@ -1,5 +1,9 @@
 { config, inputs, ... }: {
-  imports = [ inputs.serokell-nix.nixosModules.serokell-users inputs.serokell-nix.nixosModules.vault-secrets ];
+  imports = [
+    inputs.serokell-nix.nixosModules.common
+    inputs.serokell-nix.nixosModules.serokell-users
+    inputs.serokell-nix.nixosModules.vault-secrets
+  ];
 
   networking.domain = "aquarius.serokell.team";
 
