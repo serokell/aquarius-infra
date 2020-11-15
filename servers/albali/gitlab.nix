@@ -44,18 +44,7 @@ in {
     };
   };
 
-  # Use a static user for gitlab-runner instead of DynamicUser, to
-  # be able to assign subuids to it
-  users.groups.gitlab-runner = { };
-  users.users.gitlab-runner = {
-    name = "gitlab-runner";
-    group = "gitlab-runner";
-    home = "/var/lib/gitlab-runner";
-  };
   systemd.services.gitlab-runner = {
-    serviceConfig = {
-      DynamicUser = lib.mkForce false;
-      User = "gitlab-runner";
-    };
+    path = with pkgs; [ git ];
   };
 }
