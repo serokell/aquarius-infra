@@ -3,17 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:serokell/nixpkgs";
-    serokell-nix = {
-      type = "github";
-      owner = "serokell";
-      repo = "serokell.nix";
-      ref = "master";
-    };
+    serokell-nix.url = "github:serokell/serokell.nix";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    deploy-rs.url = "github:serokell/deploy-rs/review";
+    deploy-rs.url = "github:serokell/deploy-rs";
     upload-daemon.url = "github:serokell/upload-daemon";
     tezos-packaging = {
       url = "github:serokell/tezos-packaging";

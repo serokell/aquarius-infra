@@ -8,16 +8,15 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1605075377,
-        "narHash": "sha256-znlm/iDiNgAGcpzewpKOWyBcIhPCHp67lENZLs2f8Cg=",
+        "lastModified": 1605409665,
+        "narHash": "sha256-kZrpEbS6hK/W/Sm7gvBt2uKCaRAxme7B9YgybuCUg70=",
         "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "47978fcfc9362f659c1406fa60f1de7d21d1e50e",
+        "rev": "47df4ff9284051a5c41a7b2b5696f9c4ccbe792f",
         "type": "github"
       },
       "original": {
         "owner": "serokell",
-        "ref": "review",
         "repo": "deploy-rs",
         "type": "github"
       }
@@ -398,7 +397,6 @@
       },
       "original": {
         "owner": "serokell",
-        "ref": "master",
         "repo": "serokell.nix",
         "type": "github"
       }
