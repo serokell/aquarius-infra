@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 let vs = config.vault-secrets.secrets;
 in {
-
   systemd.tmpfiles.rules = [
     # https://www.freedesktop.org/software/systemd/man/tmpfiles.d.html
     "d /var/lib/backup 0700 -"
@@ -11,6 +10,7 @@ in {
     secretsBase64 = true;
     services = [ "borgbackup-job-albali" ];
   };
+
   services.borgbackup.jobs.albali = {
     encryption = {
       mode = "repokey-blake2";
@@ -21,8 +21,6 @@ in {
       BORG_REMOTE_PATH = "borg1";
       BORG_RSH = "ssh -i ${vs.borgbackup}/ssh_private_key";
     };
-
-    privateTmp = false; # need postgres socket
 
     exclude = [
       "**/.cabal"
@@ -61,5 +59,4 @@ in {
         RestartSec = 10;
       };
     };
-
 }
