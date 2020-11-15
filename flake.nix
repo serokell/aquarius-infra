@@ -64,16 +64,24 @@
       deploy.nodes = mapAttrs (_: nixosConfig: {
         hostname =
           "${nixosConfig.config.networking.hostName}.${nixosConfig.config.networking.domain}";
+        sshOpts = [ "-p" "17788" ];
+
+        profiles.system.user = "root";
         profiles.system.path = deploy-rs.lib.${system}.setActivate
           nixosConfig.config.system.build.toplevel
           "$PROFILE/bin/switch-to-configuration switch";
       }) self.nixosConfigurations;
 
       devShell = mapAttrs (system: deploy:
-        nixpkgs.legacyPackages.${system}.mkShell {
-          buildInputs =
-            [ deploy (terraformFor nixpkgs.legacyPackages.${system}) ];
-        }) deploy-rs.defaultPackage;
+        let pkgs = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
+        in pkgs.mkShell {
+            buildInputs =
+              [
+                deploy
+                (terraformFor pkgs)
+                pkgs.nixUnstable
+              ];
+          }) deploy-rs.defaultPackage;
 
       checks = recursiveUpdate deployChecks checks;
     };
