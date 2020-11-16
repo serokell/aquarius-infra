@@ -34,7 +34,7 @@
       deployChecks =
         mapAttrs (_: lib: lib.deployChecks self.deploy) deploy-rs.lib;
 
-      terraformFor = pkgs: pkgs.terraform.withPlugins (p: with p; [ aws hcloud ]);
+      terraformFor = pkgs: pkgs.terraform.withPlugins (p: with p; [ aws hcloud vault ]);
 
       checks = mapAttrs (_: pkgs:
         let pkgs' = pkgs.extend serokell-nix.overlay;
