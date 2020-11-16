@@ -44,7 +44,5 @@ in {
     };
   };
 
-  systemd.services.gitlab-runner = {
-    path = with pkgs; [ git ];
-  };
+  environment.systemPackages = [ pkgs.git ];
 }
