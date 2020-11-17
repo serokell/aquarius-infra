@@ -76,6 +76,18 @@
 
   services.openssh.enable = true;
 
+  # add host keys for ment server for deploying via ssh
+  programs.ssh.knownHosts = [
+    {
+      hostNames = [ "staging.ment.serokell.team" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMTEXN9yBPSTdFRtOkJGt/CzlemqS/bSzbsOGDRvU/U/";
+    }
+    {
+      hostNames = [ "ment.hr" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIWQaHzlzVhBo8Yld/5bUp5fvOQiPJOMHFJyu7iMPHs";
+    }
+  ];
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
