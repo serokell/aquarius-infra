@@ -65,33 +65,4 @@
     interface = "enp35s0";
   };
   networking.nameservers = [ "8.8.8.8" ];
-
-  # Initial empty root password for easy login:
-  users.users.root.initialHashedPassword = "";
-  services.openssh.permitRootLogin = "prohibit-password";
-
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6QX3kMz1z3+QrMZQldgc2Flp+YcxDGWyGp3umdGgGhI3b91IZoOpgxrKFa/XPCa37ysrrMn2z15qR0JazghQOXAPbRbf6ZZ7H4sYDhk8D6O9/1Kcpm1UTJtcz3I3/Da9RvM9f+2biknP2lQEyZN1rW8F/olMQ0rB5QUoJBpZxGnkGH3XXdRf7DAi+kZTQyrsnoWFtJvjKe1kzmXC6xyVtwDHPgQjDA7hD5dGbceMtIge5ZW3KFoQJLO/gWsOR+NXRaBy1cmYhaCW7i7e0+409IUWR5fwWyTHTKcXSLusZcbc1JQItJVkiUcDk0slLS9RT8Leg9OpbRrqJ9oDJO+DV notgne2@peppa"
-  ];
-
-  services.openssh.enable = true;
-
-  # add host keys for ment server for deploying via ssh
-  programs.ssh.knownHosts = [
-    {
-      hostNames = [ "staging.ment.serokell.team" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMTEXN9yBPSTdFRtOkJGt/CzlemqS/bSzbsOGDRvU/U/";
-    }
-    {
-      hostNames = [ "ment.hr" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIWQaHzlzVhBo8Yld/5bUp5fvOQiPJOMHFJyu7iMPHs";
-    }
-  ];
-
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "20.03"; # Did you read the comment?
-
 }
