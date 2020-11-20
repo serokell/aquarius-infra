@@ -21,40 +21,66 @@
       inherit (nixpkgs.lib) nixosSystem filterAttrs const recursiveUpdate;
       inherit (builtins) readDir mapAttrs;
       system = "x86_64-linux";
+
+      pkgs = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
+
+      terraform = pkgs.terraform.withPlugins (p: with p; [ aws ]);
+
       servers = mapAttrs (path: _: import (./servers + "/${path}"))
         (filterAttrs (_: t: t == "directory") (readDir ./servers));
       mkSystem = config:
         nixosSystem {
           inherit system;
-          modules =
-            [ config ./common.nix ];
+          modules = [ config ./common.nix ];
           specialArgs.inputs = inputs;
         };
 
       deployChecks =
         mapAttrs (_: lib: lib.deployChecks self.deploy) deploy-rs.lib;
 
-      terraformFor = pkgs: pkgs.terraform.withPlugins (p: with p; [ aws ]);
+      checks.${system} = {
+        trailing-whitespace = pkgs.build.checkTrailingWhitespace ./.;
+        terraform = pkgs.runCommand "terraform-check" {
+          src = ./terraform;
+          buildInputs = [ terraform ];
+        } ''
+          cp -r $src ./terraform
+          terraform init -backend=false terraform
+          terraform validate terraform
+          touch $out
+        '';
+      };
 
-      checks = mapAttrs (_: pkgs:
-        let pkgs' = pkgs.extend serokell-nix.overlay;
-        in {
-          trailing-whitespace = pkgs'.build.checkTrailingWhitespace ./.;
-          terraform = pkgs.runCommand "terraform-check" {
-            src = ./terraform;
-            buildInputs = [ (terraformFor pkgs) ];
-          } ''
-            cp -r $src ./terraform
-            terraform init -backend=false terraform
-            terraform validate terraform
-            touch $out
-          '';
-        }) nixpkgs.legacyPackages;
+      vault-push-approles = pkgs.vault-push-approles self (final: prev: {
+        mkPolicy = { approleName, ... }@params:
+          if !isNull (builtins.match ".*buildkite.*" approleName) then {
+            path = (prev.mkPolicy params).path ++ (let
+              namespace = "serokell${
+                  nixpkgs.lib.optionalString
+                  (!isNull (builtins.match ".*private.*" approleName))
+                  "-private"
+                }";
+            in [
+              {
+                "buildkite/metadata/${namespace}/*" = [{ capabilities = [ "list" ]; }];
+              }
+              {
+                "buildkite/+/${namespace}/*" = [{ capabilities = [ "read" ]; }];
+              }
+            ]);
+          } else
+            prev.mkPolicy params;
+      });
     in {
       nixosConfigurations = mapAttrs (const mkSystem) servers;
 
       deploy.magicRollback = true;
       deploy.autoRollback = true;
+
+      apps.${system}.vault-push-approles = {
+        program = "${vault-push-approles}/bin/vault-push-approles";
+        type = "app";
+      };
 
       deploy.nodes = mapAttrs (_: nixosConfig: {
         hostname =
@@ -67,16 +93,14 @@
           "$PROFILE/bin/switch-to-configuration switch";
       }) self.nixosConfigurations;
 
-      devShell = mapAttrs (system: deploy:
-        let pkgs = nixpkgs.legacyPackages.${system}.extend serokell-nix.overlay;
-        in pkgs.mkShell {
-            buildInputs =
-              [
-                deploy
-                (terraformFor pkgs)
-                pkgs.nixUnstable
-              ];
-          }) deploy-rs.defaultPackage;
+      devShell.${system} = pkgs.mkShell {
+        buildInputs = [
+          deploy-rs.defaultPackage.${system}
+          terraform
+          vault-push-approles
+          pkgs.nixUnstable
+        ];
+      };
 
       checks = recursiveUpdate deployChecks checks;
     };
