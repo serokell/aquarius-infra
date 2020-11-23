@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
-  services.local-chains.chains.carthagenet = {
-    rpcPort = 8734;
-    baseProtocol = "006-PsCARTHA";
+  services.local-chains.chains.delphinet = {
+    rpcPort = 8735;
+    baseProtocol = "007-PsDELPH1";
     moneybagSecretKeys = [
       # tz1NpbW6KL2B9ELL2CEbUj1jZKHNpoC2hYdS
       # morley
@@ -35,11 +35,4 @@
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
   };
-  services.local-chains.chains.delphinet = {
-    rpcPort = 8735;
-    baseProtocol = "007-PsDELPH1";
-    moneybagSecretKeys =
-      config.services.local-chains.chains.carthagenet.moneybagSecretKeys;
-  };
-
 }
