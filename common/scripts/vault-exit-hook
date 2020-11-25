@@ -4,3 +4,6 @@ if [[ -n "${SSH_AGENT_PID:-}" ]] && ps -p "$SSH_AGENT_PID" &>/dev/null; then
   echo "~~~ Stopping ssh-agent ${SSH_AGENT_PID}"
   ssh-agent -k
 fi
+if [[ -e "$GNUPGHOME" ]]; then
+    rm -r "$GNUPGHOME"
+fi
