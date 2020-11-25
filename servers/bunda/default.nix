@@ -8,6 +8,7 @@
   boot.cleanTmpDir = true;
   networking.hostName = "bunda";
 
+  users.users.buildkite-agent-docker.extraGroups = [ "docker" ];
   virtualisation.docker = {
     enable = true;
     storageDriver = "overlay2";
