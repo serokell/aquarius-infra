@@ -15,6 +15,7 @@ in {
           bash
           bzip2
           cachix
+          gnupg
           gnutar
           gzip
           jq
