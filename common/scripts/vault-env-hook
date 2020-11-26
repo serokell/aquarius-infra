@@ -36,6 +36,20 @@ processSshSecrets() {
     # TODO: make sure there's at least 1?
 }
 
+processPgpKey() {
+    local envKey="$1"
+    local pgp_key
+    pgp_key=$(vault kv get -field=value "buildkite/$envKey/private_pgp_key" | base64 -d)
+    if [[ -n "$pgp_key" ]]; then
+        echo "Found pgp key at ${envKey}/private_pgp_key (${#pgp_key} bytes)" >&2
+        local pgp_dir
+        pgp_dir="/tmp/$BUILDKITE_BUILD_ID"
+        mkdir -p "$pgp_dir"
+        export GNUPGHOME="$pgp_dir"
+        echo "$pgp_key" | gpg --import
+    fi
+}
+
 dumpEnvSecrets() {
   if [[ "${BUILDKITE_PLUGIN_VAULT_SECRETS_DUMP_ENV:-}" =~ ^(true|1)$ ]] ; then
     echo "~~~ Environment variables that were set" >&2;
@@ -104,6 +118,7 @@ echo "~~~ Downloading secrets from :vault: $VAULT_ADDR" >&2;
 for secret in "$BUILDKITE_ORGANIZATION_SLUG/"{'*',"$BUILDKITE_PIPELINE_SLUG"}; do
     processEnvSecrets "$secret"
     processSshSecrets "$secret"
+    processPgpKey "$secret"
 done
 
 # First clean up VAULT_TOKEN, then dump env secrets
