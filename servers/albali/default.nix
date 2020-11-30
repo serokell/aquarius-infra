@@ -11,8 +11,6 @@
     ./local-chain-tezos-node.nix
     ./chain.nix
 
-    ./backups.nix
-
     ./buildkite.nix
 
     ./gitlab.nix
