@@ -27,10 +27,11 @@
       # tz1bcWsBeXUQ1e7Xz4iXEpTDN1tvRyb2GM9f
       # baseDAO
       "unencrypted:edsk3nAQ3uCP7vc2ccLhhWNNncgFfWQ5HgTyPawepQ8DURRRfzVQzB"
+      # tz1dbxZCZYi23zMWLLYPF2fW83YYNJBYQYnw
+      # morley-multisig
+      "unencrypted:edsk2mThb5CZVy2jKhjReNHD3BXeN4UvCDJcvccsaMrZ4NMiRHeCxN"
 
       # Keys below are unassigned, feel free to use them
-      # tz1dbxZCZYi23zMWLLYPF2fW83YYNJBYQYnw
-      "unencrypted:edsk2mThb5CZVy2jKhjReNHD3BXeN4UvCDJcvccsaMrZ4NMiRHeCxN"
       # tz1fDbuARxQapX6yP6k8QAGRUichBABDSh9T
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
