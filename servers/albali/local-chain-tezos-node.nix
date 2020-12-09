@@ -23,10 +23,13 @@ let
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-006-PsCARTHA}/bin/tezos-baker-006-PsCARTHA";
     "007-PsDELPH1" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-007-PsDELPH1}/bin/tezos-baker-007-PsDELPH1";
+    "008-PtEdoTez" =
+      "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdoTez}/bin/tezos-baker-008-PtEdoTez";
   };
   full-protocols-names = {
     "006-PsCARTHA" = "PsCARTHAGazKbHtnKfLzQg3kms52kSRpgnDY982a9oYsSXRLQEb";
     "007-PsDELPH1" = "PsDELPH1Kxsxt8f9eWbxQeRxkjfbxoqM52jvs5Y5fBxWWh4ifpo";
+    "008-PtEdoTez" = "PtEdoTezd3RHSC31mpxxo1npxFjoWWcFgQtxapi51Z8TLu6v6Uq";
   };
   nodeConfigs = {
     "006-PsCARTHA" = genesisPubkey:
@@ -71,9 +74,30 @@ let
         };
         p2p = { };
       };
+    "008-PtEdoTez" = genesisPubkey:
+      { network = {
+          chain_name = "TEZOS_EDONET_2020-11-30T12:00:00Z";
+          default_bootstrap_peers = [ ];
+          genesis = {
+            block = "BLockGenesisGenesisGenesisGenesisGenesis2431bbUwV2a";
+            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
+            timestamp = "2020-09-04T07:08:53Z";
+          };
+          genesis_parameters = {
+            values = {
+              genesis_pubkey =
+                genesisPubkey;
+            };
+          };
+          incompatible_chain_name = "INCOMPATIBLE";
+          old_chain_name = "TEZOS_EDONET_2020-11-30T12:00:00Z";
+          sandboxed_chain_name = "SANDBOXED_TEZOS";
+        };
+        p2p = { };
+      };
   };
   tezos-client-args = chain-name: chain-config:
-    ''-A 127.0.0.1 -P ${toString chain-config.rpcPort} -d "/var/lib/local-chain-${chain-name}/client"'';
+    ''--endpoint http://127.0.0.1:${toString chain-config.rpcPort} -d "/var/lib/local-chain-${chain-name}/client"'';
   localChainOptions = types.submodule ({...}: {
     options = {
       rpcPort = mkOption {
