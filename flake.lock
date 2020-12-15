@@ -285,11 +285,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1605229303,
-        "narHash": "sha256-RrkHW5WkiFFpCB8QKEQW/WLgr3ZFWSmKI593bQfkvzY=",
+        "lastModified": 1608026448,
+        "narHash": "sha256-Kf9q1GCrlAq25DruPL9L7b6Oyl4kCYAPnhgbLONtzig=",
         "owner": "serokell",
         "repo": "upload-daemon",
-        "rev": "70d000640de907ac2043f496be948245d160dfa6",
+        "rev": "c7854dbd088b6681395f6d3b443d47c0585bbc6c",
         "type": "github"
       },
       "original": {
