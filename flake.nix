@@ -14,6 +14,7 @@
       url = "github:serokell/tezos-packaging";
       flake = false;
     };
+    nix-master.url = "github:nixos/nix";
   };
 
   outputs = { self, nixpkgs, serokell-nix, deploy-rs, ... }@inputs:
@@ -72,7 +73,7 @@
               [
                 deploy
                 (terraformFor pkgs)
-                pkgs.nixUnstable
+                inputs.nix-master.packages.${system}.nix
               ];
           }) deploy-rs.defaultPackage;
 

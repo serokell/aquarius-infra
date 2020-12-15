@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
   inherit (lib) mkMerge;
 
@@ -23,6 +23,11 @@ in {
           procps
           vault-bin
           xz
+          inputs.deploy-rs.defaultPackage.${pkgs.system}
+          (pkgs.writeScriptBin "nix-unstable" ''
+            #!${pkgs.stdenv.shell}
+            ${inputs.nix-master.packages.${pkgs.system}.nix}/bin/nix --experimental-features 'nix-command flakes' $@
+          '')
         ];
         hooks = {
           environment = "source ${./scripts/vault-env-hook}";
