@@ -6,6 +6,9 @@ in
 {
   vault-secrets.secrets.nix.services = [];
 
+  # contains AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY for wasabi
+  vault-secrets.secrets.upload-daemon = {};
+
   services.upload-daemon = {
     enable = true;
     target = cache;
@@ -15,4 +18,6 @@ in
       secretKey = "${vs.nix}/key";
     };
   };
+
+  systemd.services.upload-daemon.serviceConfig.EnvironmentFile = "${vs.upload-daemon}/environment";
 }
