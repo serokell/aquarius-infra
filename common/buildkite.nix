@@ -5,6 +5,9 @@ let
   vs = config.vault-secrets.secrets;
 in {
   mkBuildkite = name: extraConfig: {
+    nix.extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
     vault-secrets.secrets."buildkite-agent-${name}".user =
       "buildkite-agent-${name}";
     systemd.services."buildkite-agent-${name}".serviceConfig.EnvironmentFile =
@@ -26,7 +29,7 @@ in {
           inputs.deploy-rs.defaultPackage.${pkgs.system}
           (pkgs.writeScriptBin "nix-unstable" ''
             #!${pkgs.stdenv.shell}
-            ${inputs.nix-master.packages.${pkgs.system}.nix}/bin/nix --experimental-features 'nix-command flakes' $@
+            ${inputs.nix-master.packages.${pkgs.system}.nix}/bin/nix "$@"
           '')
         ];
         hooks = {
