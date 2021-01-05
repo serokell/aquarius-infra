@@ -5,9 +5,6 @@ let
   vs = config.vault-secrets.secrets;
 in {
   mkBuildkite = name: extraConfig: {
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
     vault-secrets.secrets."buildkite-agent-${name}".user =
       "buildkite-agent-${name}";
     systemd.services."buildkite-agent-${name}".serviceConfig.EnvironmentFile =
