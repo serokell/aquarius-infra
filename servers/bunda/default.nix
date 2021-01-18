@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    inputs.serokell-nix.nixosModules.hetzner-cloud
     ./buildkite.nix
     ./gitlab.nix
   ];
