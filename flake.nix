@@ -2,7 +2,7 @@
   description = "NixOS systems for the build cluster";
 
   inputs = {
-    nixpkgs.url = "github:serokell/nixpkgs";
+    nixpkgs.url = "github:serokell/nixpkgs/ops1154-bump-sudo-aquarius";
     serokell-nix.url = "github:serokell/serokell.nix";
     flake-compat = {
       url = "github:edolstra/flake-compat";

@@ -174,15 +174,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1601640588,
-        "narHash": "sha256-EKCgoeOA5i3DQQx2lfyzvjwCiklnSCXsnHzh9gg1AD4=",
+        "lastModified": 1611736689,
+        "narHash": "sha256-QC/iFqHKlX79h0KFO3rzQqJsDx5VUH202efAtydHs5I=",
         "owner": "serokell",
         "repo": "nixpkgs",
-        "rev": "1e22f7603d223a67e7cd219939e1c1042419ff24",
+        "rev": "9c724c90a034d694f346a5fe0f7b90f3776ea2ad",
         "type": "github"
       },
       "original": {
         "owner": "serokell",
+        "ref": "ops1154-bump-sudo-aquarius",
         "repo": "nixpkgs",
         "type": "github"
       }
