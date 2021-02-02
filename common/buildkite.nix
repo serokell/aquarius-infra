@@ -23,7 +23,6 @@ in {
           procps
           vault-bin
           xz
-          inputs.deploy-rs.defaultPackage.${pkgs.system}
           (pkgs.writeScriptBin "nix-unstable" ''
             #!${pkgs.stdenv.shell}
             ${inputs.nix-master.packages.${pkgs.system}.nix}/bin/nix "$@"
