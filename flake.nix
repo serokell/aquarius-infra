@@ -2,7 +2,7 @@
   description = "NixOS systems for the build cluster";
 
   inputs = {
-    nixpkgs.url = "github:serokell/nixpkgs/ops1154-bump-sudo-aquarius";
+    nixpkgs.url = "github:serokell/nixpkgs";
     serokell-nix.url = "github:serokell/serokell.nix";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -62,9 +62,7 @@
         sshOpts = [ "-p" "17788" ];
 
         profiles.system.user = "root";
-        profiles.system.path = deploy-rs.lib.${system}.setActivate
-          nixosConfig.config.system.build.toplevel
-          "$PROFILE/bin/switch-to-configuration switch";
+        profiles.system.path = deploy-rs.lib.${system}.activate.nixos nixosConfig;
       }) self.nixosConfigurations;
 
       devShell = mapAttrs (system: deploy:
