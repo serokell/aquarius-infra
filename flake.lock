@@ -301,11 +301,11 @@
     "tezos-packaging": {
       "flake": false,
       "locked": {
-        "lastModified": 1607935961,
-        "narHash": "sha256-3Z5qnA614RBZMLWtRzOLtDz1VXddCI85ldmE8B3WelI=",
+        "lastModified": 1613143624,
+        "narHash": "sha256-crxKN8tENu+TlkdlTblCKwvoozJqip4R3K0PJc//EXg=",
         "owner": "serokell",
         "repo": "tezos-packaging",
-        "rev": "b2b3687c9d89ac00fb134ea6015fd970aa7a39d9",
+        "rev": "931fb679500c707a756e5471bf991eafc686adfe",
         "type": "github"
       },
       "original": {
