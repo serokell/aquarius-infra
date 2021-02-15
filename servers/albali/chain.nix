@@ -38,7 +38,7 @@
   };
   services.local-chains.chains.edonet = {
     rpcPort = 8734;
-    baseProtocol = "008-PtEdoTez";
+    baseProtocol = "008-PtEdo2Zk";
     moneybagSecretKeys =
       config.services.local-chains.chains.delphinet.moneybagSecretKeys;
   };
