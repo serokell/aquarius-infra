@@ -19,40 +19,16 @@ let
     "${pkgs-with-tezos.ocamlPackages.tezos-client}/bin/tezos-client";
   tezos-node = "${pkgs-with-tezos.ocamlPackages.tezos-node}/bin/tezos-node";
   tezos-bakers = {
-    "006-PsCARTHA" =
-      "${pkgs-with-tezos.ocamlPackages.tezos-baker-006-PsCARTHA}/bin/tezos-baker-006-PsCARTHA";
     "007-PsDELPH1" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-007-PsDELPH1}/bin/tezos-baker-007-PsDELPH1";
     "008-PtEdo2Zk" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdo2Zk}/bin/tezos-baker-008-PtEdo2Zk";
   };
   full-protocols-names = {
-    "006-PsCARTHA" = "PsCARTHAGazKbHtnKfLzQg3kms52kSRpgnDY982a9oYsSXRLQEb";
     "007-PsDELPH1" = "PsDELPH1Kxsxt8f9eWbxQeRxkjfbxoqM52jvs5Y5fBxWWh4ifpo";
     "008-PtEdo2Zk" = "PtEdo2ZkT9oKpimTah6x2embF25oss54njMuPzkJTEi5RqfdZFA";
   };
   nodeConfigs = {
-    "006-PsCARTHA" = genesisPubkey:
-      { network = {
-          chain_name = "TEZOS_ALPHANET_CARTHAGE_2019-11-28T13:02:13Z";
-          default_bootstrap_peers = [ ];
-          genesis = {
-            block = "BLockGenesisGenesisGenesisGenesisGenesisd6f5afWyME7";
-            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
-            timestamp = "2019-11-28T13:02:13Z";
-          };
-          genesis_parameters = {
-            values = {
-              genesis_pubkey =
-                genesisPubkey;
-            };
-          };
-          incompatible_chain_name = "INCOMPATIBLE";
-          old_chain_name = "TEZOS_ALPHANET_CARTHAGE_2019-11-28T13:02:13Z";
-          sandboxed_chain_name = "SANDBOXED_TEZOS";
-        };
-        p2p = { };
-      };
     "007-PsDELPH1" = genesisPubkey:
       { network = {
           chain_name = "TEZOS_DELPHINET_2020-09-04T07:08:53Z";
@@ -201,8 +177,8 @@ let
       baseProtocol = mkOption {
         type = types.str;
         description =
-          "Base protocol for local-chain, only '006-PsCARTHA' and '007-PsDELPH1' are supported";
-        example = "006-PsCARTHA";
+          "Base protocol for local-chain, only '007-PsDELPH1' and '008-PtEdo2Zk' are supported";
+        example = "008-PtEdo2Zk";
       };
     };
   });
