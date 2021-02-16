@@ -21,11 +21,14 @@ let
   tezos-bakers = {
     "007-PsDELPH1" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-007-PsDELPH1}/bin/tezos-baker-007-PsDELPH1";
+    "008-PtEdoTez" =
+      "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdoTez}/bin/tezos-baker-008-PtEdoTez";
     "008-PtEdo2Zk" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdo2Zk}/bin/tezos-baker-008-PtEdo2Zk";
   };
   full-protocols-names = {
     "007-PsDELPH1" = "PsDELPH1Kxsxt8f9eWbxQeRxkjfbxoqM52jvs5Y5fBxWWh4ifpo";
+    "008-PtEdoTez" = "PtEdoTezd3RHSC31mpxxo1npxFjoWWcFgQtxapi51Z8TLu6v6Uq";
     "008-PtEdo2Zk" = "PtEdo2ZkT9oKpimTah6x2embF25oss54njMuPzkJTEi5RqfdZFA";
   };
   nodeConfigs = {
@@ -46,6 +49,27 @@ let
           };
           incompatible_chain_name = "INCOMPATIBLE";
           old_chain_name = "TEZOS_DELPHINET_2020-09-04T07:08:53Z";
+          sandboxed_chain_name = "SANDBOXED_TEZOS";
+        };
+        p2p = { };
+      };
+    "008-PtEdoTez" = genesisPubkey:
+      { network = {
+          chain_name = "TEZOS_EDONET_2020-11-30T12:00:00Z";
+          default_bootstrap_peers = [ ];
+          genesis = {
+            block = "BLockGenesisGenesisGenesisGenesisGenesis2431bbUwV2a";
+            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
+            timestamp = "2020-09-04T07:08:53Z";
+          };
+          genesis_parameters = {
+            values = {
+              genesis_pubkey =
+                genesisPubkey;
+            };
+          };
+          incompatible_chain_name = "INCOMPATIBLE";
+          old_chain_name = "TEZOS_EDONET_2020-11-30T12:00:00Z";
           sandboxed_chain_name = "SANDBOXED_TEZOS";
         };
         p2p = { };
