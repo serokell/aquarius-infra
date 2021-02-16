@@ -15,44 +15,21 @@ let
      }
     ));
   pkgs-with-tezos = (import "${inputs.tezos-packaging}/nix/build/pkgs.nix" { });
-  tezos-client =
-    "${pkgs-with-tezos.ocamlPackages.tezos-client}/bin/tezos-client";
-  tezos-node = "${pkgs-with-tezos.ocamlPackages.tezos-node}/bin/tezos-node";
+  pkgs-with-tezos-v8_1 = (import "${inputs.tezos-packaging-v8_1-1}/nix/build/pkgs.nix" { });
   tezos-bakers = {
-    "006-PsCARTHA" =
-      "${pkgs-with-tezos.ocamlPackages.tezos-baker-006-PsCARTHA}/bin/tezos-baker-006-PsCARTHA";
     "007-PsDELPH1" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-007-PsDELPH1}/bin/tezos-baker-007-PsDELPH1";
     "008-PtEdoTez" =
-      "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdoTez}/bin/tezos-baker-008-PtEdoTez";
+      "${pkgs-with-tezos-v8_1.ocamlPackages.tezos-baker-008-PtEdoTez}/bin/tezos-baker-008-PtEdoTez";
+    "008-PtEdo2Zk" =
+      "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdo2Zk}/bin/tezos-baker-008-PtEdo2Zk";
   };
   full-protocols-names = {
-    "006-PsCARTHA" = "PsCARTHAGazKbHtnKfLzQg3kms52kSRpgnDY982a9oYsSXRLQEb";
     "007-PsDELPH1" = "PsDELPH1Kxsxt8f9eWbxQeRxkjfbxoqM52jvs5Y5fBxWWh4ifpo";
     "008-PtEdoTez" = "PtEdoTezd3RHSC31mpxxo1npxFjoWWcFgQtxapi51Z8TLu6v6Uq";
+    "008-PtEdo2Zk" = "PtEdo2ZkT9oKpimTah6x2embF25oss54njMuPzkJTEi5RqfdZFA";
   };
   nodeConfigs = {
-    "006-PsCARTHA" = genesisPubkey:
-      { network = {
-          chain_name = "TEZOS_ALPHANET_CARTHAGE_2019-11-28T13:02:13Z";
-          default_bootstrap_peers = [ ];
-          genesis = {
-            block = "BLockGenesisGenesisGenesisGenesisGenesisd6f5afWyME7";
-            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
-            timestamp = "2019-11-28T13:02:13Z";
-          };
-          genesis_parameters = {
-            values = {
-              genesis_pubkey =
-                genesisPubkey;
-            };
-          };
-          incompatible_chain_name = "INCOMPATIBLE";
-          old_chain_name = "TEZOS_ALPHANET_CARTHAGE_2019-11-28T13:02:13Z";
-          sandboxed_chain_name = "SANDBOXED_TEZOS";
-        };
-        p2p = { };
-      };
     "007-PsDELPH1" = genesisPubkey:
       { network = {
           chain_name = "TEZOS_DELPHINET_2020-09-04T07:08:53Z";
@@ -91,6 +68,27 @@ let
           };
           incompatible_chain_name = "INCOMPATIBLE";
           old_chain_name = "TEZOS_EDONET_2020-11-30T12:00:00Z";
+          sandboxed_chain_name = "SANDBOXED_TEZOS";
+        };
+        p2p = { };
+      };
+    "008-PtEdo2Zk" = genesisPubkey:
+      { network = {
+          chain_name = "TEZOS_EDONET_2020-11-30T12:00:00Z";
+          default_bootstrap_peers = [ ];
+          genesis = {
+            block = "BLockGenesisGenesisGenesisGenesisGenesisdae8bZxCCxh";
+            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
+            timestamp = "2021-02-11T14:00:00Z";
+          };
+          genesis_parameters = {
+            values = {
+              genesis_pubkey =
+                genesisPubkey;
+            };
+          };
+          incompatible_chain_name = "INCOMPATIBLE";
+          old_chain_name = "TEZOS_EDO2NET_2021-02-11T14:00:00Z";
           sandboxed_chain_name = "SANDBOXED_TEZOS";
         };
         p2p = { };
@@ -201,8 +199,8 @@ let
       baseProtocol = mkOption {
         type = types.str;
         description =
-          "Base protocol for local-chain, only '006-PsCARTHA' and '007-PsDELPH1' are supported";
-        example = "006-PsCARTHA";
+          "Base protocol for local-chain, only '007-PsDELPH1' and '008-PtEdo2Zk' are supported";
+        example = "008-PtEdo2Zk";
       };
     };
   });
@@ -220,7 +218,19 @@ in {
       groups."local-chain-${chain-name}" = {};
       users."local-chain-${chain-name}" = { group = "local-chain-${chain-name}"; };
     }));
-    systemd = lib.mkMerge (flip mapAttrsToList cfg.chains (chain-name: chain-config: {
+    systemd = lib.mkMerge (flip mapAttrsToList cfg.chains (chain-name: chain-config:
+      let
+        tezos-client =
+          if chain-config.baseProtocol == "008-PtEdoTez"
+          # v8.2 doesn't support old edo protocol
+          then "${pkgs-with-tezos-v8_1.ocamlPackages.tezos-client}/bin/tezos-client"
+          else "${pkgs-with-tezos.ocamlPackages.tezos-client}/bin/tezos-client";
+        tezos-node =
+          if chain-config.baseProtocol == "008-PtEdoTez"
+          # v8.2 doesn't support old edo protocol
+          then "${pkgs-with-tezos-v8_1.ocamlPackages.tezos-node}/bin/tezos-node"
+          else "${pkgs-with-tezos.ocamlPackages.tezos-node}/bin/tezos-node";
+      in {
       services."local-chain-${chain-name}-tezos-baker" = rec {
         wantedBy = [ "multi-user.target" ];
         requires = [ "network.target" "local-chain-${chain-name}-tezos-node.service" ];

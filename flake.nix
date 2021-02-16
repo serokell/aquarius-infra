@@ -14,6 +14,13 @@
       url = "github:serokell/tezos-packaging";
       flake = false;
     };
+    # At the moment we need two versions of Tezos binaries, because
+    # backward compatibility was broken in v8.2. This hack should be
+    # removed once https://issues.serokell.io/issue/TM-511 is resolved.
+    tezos-packaging-v8_1-1 = {
+      url = "github:serokell/tezos-packaging/v8.1-1";
+      flake = false;
+    };
     nix-master.url = "github:nixos/nix";
   };
 

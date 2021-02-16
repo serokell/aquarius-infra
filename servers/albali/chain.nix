@@ -36,9 +36,15 @@
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
   };
-  services.local-chains.chains.edonet = {
+  services.local-chains.chains.old-edonet = {
     rpcPort = 8734;
     baseProtocol = "008-PtEdoTez";
+    moneybagSecretKeys =
+      config.services.local-chains.chains.delphinet.moneybagSecretKeys;
+  };
+  services.local-chains.chains.edonet = {
+    rpcPort = 8733;
+    baseProtocol = "008-PtEdo2Zk";
     moneybagSecretKeys =
       config.services.local-chains.chains.delphinet.moneybagSecretKeys;
   };

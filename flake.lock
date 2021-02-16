@@ -273,6 +273,7 @@
         "nixpkgs": "nixpkgs_3",
         "serokell-nix": "serokell-nix",
         "tezos-packaging": "tezos-packaging",
+        "tezos-packaging-v8_1-1": "tezos-packaging-v8_1-1",
         "upload-daemon": "upload-daemon"
       }
     },
@@ -301,15 +302,32 @@
     "tezos-packaging": {
       "flake": false,
       "locked": {
-        "lastModified": 1607935961,
-        "narHash": "sha256-3Z5qnA614RBZMLWtRzOLtDz1VXddCI85ldmE8B3WelI=",
+        "lastModified": 1613143624,
+        "narHash": "sha256-crxKN8tENu+TlkdlTblCKwvoozJqip4R3K0PJc//EXg=",
         "owner": "serokell",
         "repo": "tezos-packaging",
-        "rev": "b2b3687c9d89ac00fb134ea6015fd970aa7a39d9",
+        "rev": "931fb679500c707a756e5471bf991eafc686adfe",
         "type": "github"
       },
       "original": {
         "owner": "serokell",
+        "repo": "tezos-packaging",
+        "type": "github"
+      }
+    },
+    "tezos-packaging-v8_1-1": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610442216,
+        "narHash": "sha256-pKUp3gHFm7pc37DSJqaGzwTmD+SZ4WuntJ3fDzxkKGc=",
+        "owner": "serokell",
+        "repo": "tezos-packaging",
+        "rev": "8bd7371ed13640e66477991c095dd5d0ea9f9b27",
+        "type": "github"
+      },
+      "original": {
+        "owner": "serokell",
+        "ref": "v8.1-1",
         "repo": "tezos-packaging",
         "type": "github"
       }
