@@ -15,14 +15,12 @@ let
      }
     ));
   pkgs-with-tezos = (import "${inputs.tezos-packaging}/nix/build/pkgs.nix" { });
-  tezos-client =
-    "${pkgs-with-tezos.ocamlPackages.tezos-client}/bin/tezos-client";
-  tezos-node = "${pkgs-with-tezos.ocamlPackages.tezos-node}/bin/tezos-node";
+  pkgs-with-tezos-v8_1 = (import "${inputs.tezos-packaging-v8_1-1}/nix/build/pkgs.nix" { });
   tezos-bakers = {
     "007-PsDELPH1" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-007-PsDELPH1}/bin/tezos-baker-007-PsDELPH1";
     "008-PtEdoTez" =
-      "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdoTez}/bin/tezos-baker-008-PtEdoTez";
+      "${pkgs-with-tezos-v8_1.ocamlPackages.tezos-baker-008-PtEdoTez}/bin/tezos-baker-008-PtEdoTez";
     "008-PtEdo2Zk" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdo2Zk}/bin/tezos-baker-008-PtEdo2Zk";
   };
@@ -220,7 +218,19 @@ in {
       groups."local-chain-${chain-name}" = {};
       users."local-chain-${chain-name}" = { group = "local-chain-${chain-name}"; };
     }));
-    systemd = lib.mkMerge (flip mapAttrsToList cfg.chains (chain-name: chain-config: {
+    systemd = lib.mkMerge (flip mapAttrsToList cfg.chains (chain-name: chain-config:
+      let
+        tezos-client =
+          if chain-config.baseProtocol == "008-PtEdoTez"
+          # v8.2 doesn't support old edo protocol
+          then "${pkgs-with-tezos-v8_1.ocamlPackages.tezos-client}/bin/tezos-client"
+          else "${pkgs-with-tezos.ocamlPackages.tezos-client}/bin/tezos-client";
+        tezos-node =
+          if chain-config.baseProtocol == "008-PtEdoTez"
+          # v8.2 doesn't support old edo protocol
+          then "${pkgs-with-tezos-v8_1.ocamlPackages.tezos-node}/bin/tezos-node"
+          else "${pkgs-with-tezos.ocamlPackages.tezos-node}/bin/tezos-node";
+      in {
       services."local-chain-${chain-name}-tezos-baker" = rec {
         wantedBy = [ "multi-user.target" ];
         requires = [ "network.target" "local-chain-${chain-name}-tezos-node.service" ];
