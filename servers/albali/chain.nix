@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   services.local-chains.chains.edonet = {
-    rpcPort = 8735;
+    rpcPort = 8733;
     baseProtocol = "008-PtEdo2Zk";
     moneybagSecretKeys = [
       # tz1NpbW6KL2B9ELL2CEbUj1jZKHNpoC2hYdS
