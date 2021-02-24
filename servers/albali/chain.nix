@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
-  services.local-chains.chains.delphinet = {
+  services.local-chains.chains.edonet = {
     rpcPort = 8735;
-    baseProtocol = "007-PsDELPH1";
+    baseProtocol = "008-PtEdo2Zk";
     moneybagSecretKeys = [
       # tz1NpbW6KL2B9ELL2CEbUj1jZKHNpoC2hYdS
       # morley
@@ -35,11 +35,5 @@
       # tz1fDbuARxQapX6yP6k8QAGRUichBABDSh9T
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
-  };
-  services.local-chains.chains.edonet = {
-    rpcPort = 8733;
-    baseProtocol = "008-PtEdo2Zk";
-    moneybagSecretKeys =
-      config.services.local-chains.chains.delphinet.moneybagSecretKeys;
   };
 }
