@@ -5,7 +5,7 @@ let
   credentialsTemplate = pkgs.writeText "credentials-template" ''
     [wasabi]
     aws_access_key_id=$WASABI_ACCESS_KEY_ID
-    aws_secret_access_key=$WABASI_SECRET_ACCESS_KEY
+    aws_secret_access_key=$WASABI_SECRET_ACCESS_KEY
 
     [backblaze]
     aws_access_key_id=$BACKBLAZE_ACCESS_KEY_ID
