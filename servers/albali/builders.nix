@@ -10,5 +10,7 @@
     }];
   };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   vault-secrets.secrets.mac-builder = { services = [ "nix-daemon" ]; };
 }
