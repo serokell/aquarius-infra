@@ -117,8 +117,11 @@ echo "~~~ Downloading secrets from :vault: $VAULT_ADDR" >&2;
 
 for secret in "$BUILDKITE_ORGANIZATION_SLUG/"{'*',"$BUILDKITE_PIPELINE_SLUG"}; do
     processEnvSecrets "$secret"
-    processSshSecrets "$secret"
     processPgpKey "$secret"
+done
+
+for secret in "$BUILDKITE_ORGANIZATION_SLUG/"{"$BUILDKITE_PIPELINE_SLUG",'*'}; do
+    processSshSecrets "$secret"
 done
 
 # First clean up VAULT_TOKEN, then dump env secrets
