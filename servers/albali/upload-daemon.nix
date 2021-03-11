@@ -29,7 +29,7 @@ in
   services.upload-daemon = {
     enable = true;
     targets =
-      let commonOptions = "&narinfo-compression=bzip2&compression=xz&parallel-compression=1";
+      let commonOptions = "&narinfo-compression=bzip2&compression=bzip2";
       in [
         "s3://serokell-private-cache?endpoint=s3.eu-central-1.wasabisys.com&profile=wasabi${commonOptions}"
         "s3://serokell-private-nix-cache?endpoint=s3.us-west-000.backblazeb2.com&profile=backblaze${commonOptions}"
@@ -39,6 +39,9 @@ in
       enable = true;
       secretKey = "${vs.nix}/key";
     };
+
+    # set number of concurrent uploads to the number of targets
+    workers = lib.length config.services.upload-daemon.targets;
   };
 
   systemd.services.upload-daemon.serviceConfig.Environment = [
