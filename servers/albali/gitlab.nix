@@ -12,7 +12,9 @@ in rec {
       morley-shell = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_MORLEY_SHELL" {};
 
       # https://gitlab.com/serokell
-      shell = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_SHELL" {};
+      shell = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_SHELL" {
+        runUntagged = false;
+      };
 
       # https://gitlab.com/tezosagora
       agora-shell = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_AGORA_SHELL" {};
