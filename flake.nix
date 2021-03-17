@@ -84,7 +84,32 @@
             deploy-rs.packages.${system}.deploy-rs
             pkgs.vault
             (pkgs.vault-push-approle-envs self)
-            (pkgs.vault-push-approles self)
+            (pkgs.vault-push-approles self (final: prev: {
+              # Generates a policy based on secret definition
+              mkPolicy = { approleName, name, vaultPrefix, ... }@params:
+                let
+                  # Match only the buildkite approles
+                  m =
+                    builtins.match "aquarius-albali-buildkite-agent-(.*)" approleName;
+                  # Figure out the buildkite namespace: if the (.*) in the match above is
+                  # private, then the namespace is serokell-private, and it's serokell otherwise
+                  # Note that the head here is safe since we only use this when m is not null
+                  namespace = "serokell"
+                    + pkgs.lib.optionalString (builtins.head m == "private")
+                    "-private";
+                in
+                # Always get the "default" policy,
+                pkgs.lib.recursiveUpdate (prev.mkPolicy params)
+                # and merge it with a custom buildkite policy when the approle is a "buildkite" one
+                (pkgs.lib.optionalAttrs (!isNull m) {
+                  path = {
+                    "buildkite/metadata/${namespace}/*".capabilities =
+                      [ "list" ];
+                    "buildkite/+/${namespace}/*".capabilities =
+                      [ "create" "read" "update" "delete" ];
+                  };
+                });
+            }))
             (terraformFor pkgs)
             pkgs.nixUnstable
           ];
