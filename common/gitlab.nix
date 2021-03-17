@@ -5,6 +5,7 @@ in {
   shellRunner = registrationTokenFile: extraConfig: (recursiveUpdate {
     executor = "shell";
     tagList = [ "shell-executor" "nix" ];
+    # some of our pipelines don't set any tag
     runUntagged = true;
 
     registrationConfigFile = pkgs.writeText "gitlab-registration.sh" ''
