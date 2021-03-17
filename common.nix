@@ -5,6 +5,8 @@ in {
     inputs.serokell-nix.nixosModules.common
     inputs.serokell-nix.nixosModules.serokell-users
     inputs.vault-secrets.nixosModules.vault-secrets
+
+    ./common/monitoring.nix
   ];
 
   networking.domain = "${constellation}.serokell.team";
