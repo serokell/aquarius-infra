@@ -15,6 +15,11 @@ in {
       51820 # wireguard
     ];
 
+    # firewall rules for the wireguard interface
+    networking.firewall.interfaces.wg0.allowedTCPPorts = [
+      9100 # prometheus node exporter
+    ];
+
     # enable wireguard
     networking.wireguard.interfaces.wg0 = {
       listenPort = 51820;
