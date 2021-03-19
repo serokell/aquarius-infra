@@ -90,7 +90,7 @@
                 let
                   # Match only the buildkite approles
                   m =
-                    builtins.match "aquarius-albali-buildkite-agent-(.*)" approleName;
+                    builtins.match "aquarius-[a-z]*-buildkite-agent-(.*)" approleName;
                   # Figure out the buildkite namespace: if the (.*) in the match above is
                   # private, then the namespace is serokell-private, and it's serokell otherwise
                   # Note that the head here is safe since we only use this when m is not null
