@@ -6,7 +6,9 @@
   ];
 
   boot.cleanTmpDir = true;
+
   networking.hostName = "bunda";
+  wireguard-ip-address = "172.21.0.3";
 
   hetzner.ipv6Address = "2a01:4f8:1c17:74fb::1";
 
