@@ -301,11 +301,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1616416408,
-        "narHash": "sha256-2xyshDLF5iLQSKhRIykDgm4te3Th3XwsRPk+J+CDYjU=",
+        "lastModified": 1616574475,
+        "narHash": "sha256-wdW1gmVQojoQd5q5abZ8UFmQyLQRP5xjwimXLAOK9Ls=",
         "owner": "serokell",
         "repo": "serokell.nix",
-        "rev": "c8d39be5ea3b5cac5da952f28d37095ef385b89f",
+        "rev": "b86b0c5a8fa9274446581f52de9db047102a7708",
         "type": "github"
       },
       "original": {
