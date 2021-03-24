@@ -68,4 +68,8 @@
     interface = "enp35s0";
   };
   networking.nameservers = [ "8.8.8.8" ];
+
+  # Provide default configuration in '/etc/containers'
+  # Necessary for `skopeo copy`
+  virtualisation.containers.enable = true;
 }
