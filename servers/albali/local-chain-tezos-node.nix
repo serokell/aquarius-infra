@@ -16,40 +16,16 @@ let
     ));
   pkgs-with-tezos = (import "${inputs.tezos-packaging}/nix/build/pkgs.nix" { });
   tezos-bakers = {
-    "007-PsDELPH1" =
-      "${pkgs-with-tezos.ocamlPackages.tezos-baker-007-PsDELPH1}/bin/tezos-baker-007-PsDELPH1";
     "008-PtEdo2Zk" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-008-PtEdo2Zk}/bin/tezos-baker-008-PtEdo2Zk";
     "009-PsFLoren" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-009-PsFLoren}/bin/tezos-baker-009-PsFLoren";
   };
   full-protocols-names = {
-    "007-PsDELPH1" = "PsDELPH1Kxsxt8f9eWbxQeRxkjfbxoqM52jvs5Y5fBxWWh4ifpo";
     "008-PtEdo2Zk" = "PtEdo2ZkT9oKpimTah6x2embF25oss54njMuPzkJTEi5RqfdZFA";
     "009-PsFLoren" = "PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i";
   };
   nodeConfigs = {
-    "007-PsDELPH1" = genesisPubkey:
-      { network = {
-          chain_name = "TEZOS_DELPHINET_2020-09-04T07:08:53Z";
-          default_bootstrap_peers = [ ];
-          genesis = {
-            block = "BLockGenesisGenesisGenesisGenesisGenesis355e8bjkYPv";
-            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
-            timestamp = "2020-09-04T07:08:53Z";
-          };
-          genesis_parameters = {
-            values = {
-              genesis_pubkey =
-                genesisPubkey;
-            };
-          };
-          incompatible_chain_name = "INCOMPATIBLE";
-          old_chain_name = "TEZOS_DELPHINET_2020-09-04T07:08:53Z";
-          sandboxed_chain_name = "SANDBOXED_TEZOS";
-        };
-        p2p = { };
-      };
     "008-PtEdo2Zk" = genesisPubkey:
       { network = {
           chain_name = "TEZOS_EDO2NET_2021-02-11T14:00:00Z";
@@ -197,7 +173,7 @@ let
       baseProtocol = mkOption {
         type = types.str;
         description =
-          "Base protocol for local-chain, only '007-PsDELPH1' and '008-PtEdo2Zk' are supported";
+          "Base protocol for local-chain, only '008-PtEdo2Zk' '009-PsFLoren' are supported";
         example = "008-PtEdo2Zk";
       };
     };
