@@ -6,7 +6,7 @@ in rec {
   vault-secrets.secrets.gitlab-runner = { };
   services.gitlab-runner = {
     enable = true;
-    concurrent = 8;
+    concurrent = 4;
     services = {
       # https://gitlab.com/morley-framework
       morley-shell = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_MORLEY_SHELL" {};
