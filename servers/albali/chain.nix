@@ -36,4 +36,9 @@
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
   };
+  services.local-chains.chains.florencenet = {
+    rpcPort = 8734;
+    baseProtocol = "009-PsFLoren";
+    moneybagSecretKeys = config.services.local-chains.chains.edonet.moneybagSecretKeys;
+  };
 }
