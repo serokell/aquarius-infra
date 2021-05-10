@@ -13,6 +13,12 @@ in rec {
         { runUntagged = false;
           tagList = [ "nix-with-docker" ];
         };
+
+      # https://gitlab.com/serokell
+      shell = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_SHELL"
+        { runUntagged = false;
+          tagList = [ "nix-with-docker" ];
+        };
     };
   };
 
