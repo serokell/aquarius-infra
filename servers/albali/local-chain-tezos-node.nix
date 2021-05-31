@@ -188,7 +188,7 @@ in {
   config = {
     users = lib.mkMerge (flip mapAttrsToList cfg.chains (chain-name: chain-config: {
       groups."local-chain-${chain-name}" = {};
-      users."local-chain-${chain-name}" = { group = "local-chain-${chain-name}"; };
+      users."local-chain-${chain-name}" = { isSystemUser = true; group = "local-chain-${chain-name}"; };
     }));
     systemd = lib.mkMerge (flip mapAttrsToList cfg.chains (chain-name: chain-config:
       let
