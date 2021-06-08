@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, options, ... }: {
   services.local-chains.chains.florencenet = {
     rpcPort = 8734;
     baseProtocol = "009-PsFLoren";
@@ -35,5 +35,12 @@
       # tz1fDbuARxQapX6yP6k8QAGRUichBABDSh9T
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
+  };
+  services.local-chains.chains.granadanet = {
+    rpcPort = 8733;
+    baseProtocol = "010-PtGRANAD";
+    moneybagSecretKeys = config.services.local-chains.chains.florencenet.moneybagSecretKeys;
+    # Since 010 there is a new constant to define minimal delay between blocks
+    chainParameters = config.services.local-chains.chains.florencenet.chainParameters // { minimal_block_delay = "1"; };
   };
 }

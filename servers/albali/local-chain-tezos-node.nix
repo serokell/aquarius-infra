@@ -18,9 +18,12 @@ let
   tezos-bakers = {
     "009-PsFLoren" =
       "${pkgs-with-tezos.ocamlPackages.tezos-baker-009-PsFLoren}/bin/tezos-baker-009-PsFLoren";
+    "010-PtGRANAD" =
+      "${pkgs-with-tezos.ocamlPackages.tezos-baker-010-PtGRANAD}/bin/tezos-baker-010-PtGRANAD";
   };
   full-protocols-names = {
     "009-PsFLoren" = "PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i";
+    "010-PtGRANAD" = "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV";
   };
   nodeConfigs = {
     "009-PsFLoren" = genesisPubkey:
@@ -31,6 +34,26 @@ let
             block = "BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM";
             protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
             timestamp = "2021-03-04T20:00:00Z";
+          };
+          genesis_parameters = {
+            values = {
+              genesis_pubkey =
+                genesisPubkey;
+            };
+          };
+          incompatible_chain_name = "INCOMPATIBLE";
+          sandboxed_chain_name = "SANDBOXED_TEZOS";
+        };
+        p2p = { };
+      };
+    "010-PtGRANAD" = genesisPubkey:
+      { network = {
+          chain_name = "TEZOS_GRANADANET_2021-05-21T15:00:00Z";
+          default_bootstrap_peers = [ ];
+          genesis = {
+            block = "BMFCHw1mv3A71KpTuGD3MoFnkHk9wvTYjUzuR9QqiUumKGFG6pM";
+            protocol = "PtYuensgYBb3G3x1hLLbCmcav8ue8Kyd2khADcL5LsT5R1hcXex";
+            timestamp = "2021-05-21T15:00:00Z";
           };
           genesis_parameters = {
             values = {

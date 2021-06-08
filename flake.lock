@@ -413,11 +413,11 @@
     "tezos-packaging": {
       "flake": false,
       "locked": {
-        "lastModified": 1616419111,
-        "narHash": "sha256-54Mpd0T7P7+VZZlGjnut9wHbYZO7mpVnVK+lvpOWImw=",
+        "lastModified": 1623151099,
+        "narHash": "sha256-QqrY1exv0ntiCGDexn7TNMhjgmVCiOo92T3fU6tQR9k=",
         "owner": "serokell",
         "repo": "tezos-packaging",
-        "rev": "564ef19153d61719e3fcfb5160c3b18f9dcc2dee",
+        "rev": "6b58d2dae45dedeed127511c73f13a5d24363d31",
         "type": "github"
       },
       "original": {
