@@ -40,7 +40,12 @@
     rpcPort = 8733;
     baseProtocol = "010-PtGRANAD";
     moneybagSecretKeys = config.services.local-chains.chains.florencenet.moneybagSecretKeys;
-    # Since 010 there is a new constant to define minimal delay between blocks
-    chainParameters = config.services.local-chains.chains.florencenet.chainParameters // { minimal_block_delay = "1"; };
+    # Since 010 there are a bunch of new constants
+    chainParameters = config.services.local-chains.chains.florencenet.chainParameters //
+      { minimal_block_delay = "1";
+        liquidity_baking_escape_ema_threshold = 1000000;
+        liquidity_baking_subsidy = "2500000";
+        liquidity_baking_sunset_level = 1024;
+      };
   };
 }
