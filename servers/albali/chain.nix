@@ -35,13 +35,17 @@
       # tz1fDbuARxQapX6yP6k8QAGRUichBABDSh9T
       "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
     ];
+    # This constant is not expected in 010, so it's not in the default value
+    chainParameters = {
+      test_chain_duration = "1966080";
+    };
   };
   services.local-chains.chains.granadanet = {
     rpcPort = 8733;
     baseProtocol = "010-PtGRANAD";
     moneybagSecretKeys = config.services.local-chains.chains.florencenet.moneybagSecretKeys;
     # Since 010 there are a bunch of new constants
-    chainParameters = config.services.local-chains.chains.florencenet.chainParameters //
+    chainParameters =
       { minimal_block_delay = "1";
         liquidity_baking_escape_ema_threshold = 1000000;
         liquidity_baking_subsidy = "2500000";
