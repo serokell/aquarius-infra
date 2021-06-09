@@ -162,7 +162,6 @@ let
           quorum_max = 7000;
           quorum_min = 2000;
           seed_nonce_revelation_tip = "125000";
-          test_chain_duration = "1966080";
           time_between_blocks = [ "1" "2" ];
           tokens_per_roll = "8000000000";
         };
