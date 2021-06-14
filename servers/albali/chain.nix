@@ -6,15 +6,9 @@
       # tz1NpbW6KL2B9ELL2CEbUj1jZKHNpoC2hYdS
       # morley
       "unencrypted:edsk42cYfuawC5i3PmuS3Lq73pAzgrJyVNcv9CXQspM2dG4M9QMpeS"
-      # tz1Znvao83anTh654Uu44Kb9atTp5yTK93A8
-      # tezos-btg
-      "unencrypted:edsk4JeHGnXM5nz2cyW9R5xTpM1Wk6ZgZF2j6k8h235akhSPbnEEnz"
       # tz1Vona7MnADxXVFugpHohxSTFmah5Aj5xBM
       # tezos-btc
       "unencrypted:edsk3D3Gx5q6mVL4jCAuFCoekWjM6hzrmSA3MCtDUnMAjxmxJ2rtes"
-      # tz1VPPpDoFYFJckEqR9J3UCz5crMHhsYrLw9
-      # globacap
-      "unencrypted:edsk3AvAoPS5jFov49aWBQ9oVtCPwNSne2CriHvkFxfeCg4Srr5bak"
       # tz1Z5FmSqASb3shGVNKW1jwiqPFh9vPCjDgc
       # stablecoin
       "unencrypted:edsk3GjD83F7oj2LrnRGYQer99Fj69U2QLyjWGiJ4UoBZNQwS38J4v"
@@ -30,10 +24,15 @@
       # tz1dbxZCZYi23zMWLLYPF2fW83YYNJBYQYnw
       # morley-multisig
       "unencrypted:edsk2mThb5CZVy2jKhjReNHD3BXeN4UvCDJcvccsaMrZ4NMiRHeCxN"
+      # tz1fDbuARxQapX6yP6k8QAGRUichBABDSh9T
+      # skill-game-escrow
+      "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
 
       # Keys below are unassigned, feel free to use them
-      # tz1fDbuARxQapX6yP6k8QAGRUichBABDSh9T
-      "unencrypted:edsk2pSdHRGcASgMdieWEKMnsA36vexLDJtJEfnv2AHVD8Fv1TQoD6"
+      # tz1Znvao83anTh654Uu44Kb9atTp5yTK93A8
+      "unencrypted:edsk4JeHGnXM5nz2cyW9R5xTpM1Wk6ZgZF2j6k8h235akhSPbnEEnz"
+      # tz1VPPpDoFYFJckEqR9J3UCz5crMHhsYrLw9
+      "unencrypted:edsk3AvAoPS5jFov49aWBQ9oVtCPwNSne2CriHvkFxfeCg4Srr5bak"
     ];
     # This constant is not expected in 010, so it's not in the default value
     chainParameters = {
