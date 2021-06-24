@@ -8,11 +8,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1623011836,
-        "narHash": "sha256-02M4P3eqUdV+ouZb8n1KDR1CXeZQm17cKpjKZKi0c10=",
+        "lastModified": 1624477559,
+        "narHash": "sha256-5lxwWMhCc+y+oSmDO7b9LNy20o9b/V5OKO9XS7gLxzE=",
         "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "70d71b3027b1793b780f1e2435bdbbe1b0cb9ac6",
+        "rev": "0964acc95051bd2b2d3ea0c9ab691e7be6eda7c0",
         "type": "github"
       },
       "original": {
@@ -222,11 +222,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1624284737,
-        "narHash": "sha256-k8keQhzwutEqxuwBMI+TKOd1nk+nreWH0iU9ckWo+kU=",
+        "lastModified": 1624539732,
+        "narHash": "sha256-DI9lKhVx2KWcoU8UT7W9L++PY9aVXs4iLU+GweRplrU=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "610baf359ab61d2ed07e13d119d8340a37beead3",
+        "rev": "08270af7fec1ca9954274a747e39c0d45bdb963e",
         "type": "github"
       },
       "original": {
@@ -431,11 +431,11 @@
     "tezos-packaging": {
       "flake": false,
       "locked": {
-        "lastModified": 1623418700,
-        "narHash": "sha256-eMG6KuFfTSivAz5EDTXA0Vm3TiuWtB0DFMxH9xDx334=",
+        "lastModified": 1624535179,
+        "narHash": "sha256-mlCXoXhYHyYCZIjpQNTy2CTp9ebbeiNI0CfekETnuvU=",
         "owner": "serokell",
         "repo": "tezos-packaging",
-        "rev": "2c56b7de345bf23e9f2312f2a69ecbd1ef2de8a5",
+        "rev": "107cd22e1fa923266b63bee3cc4dcccce57fd56b",
         "type": "github"
       },
       "original": {
