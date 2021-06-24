@@ -8,6 +8,9 @@
     inputs.upload-daemon.nixosModules.upload-daemon
     ./upload-daemon.nix
 
+    inputs.update-daemon.nixosModules.update-daemon
+    ./update-daemon.nix
+
     ./local-chain-tezos-node.nix
     ./chain.nix
 
