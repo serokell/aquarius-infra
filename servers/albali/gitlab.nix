@@ -21,6 +21,9 @@ in rec {
 
       # https://gitlab.com/indigo-lang
       indigo-lang = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_INDIGO_LANG" {};
+
+      # https://gitlab.com/tezos-kiln
+      tezos-kiln = gitlab.shellRunner "${vs.gitlab-runner}/REG_TOKEN_KILN_SHELL" {};
     };
   };
 
