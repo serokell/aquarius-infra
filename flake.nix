@@ -10,6 +10,7 @@
     };
     deploy-rs.url = "github:serokell/deploy-rs";
     upload-daemon.url = "github:serokell/upload-daemon";
+    update-daemon.url = "github:serokell/update-daemon";
     tezos-packaging = {
       url = "github:serokell/tezos-packaging";
       flake = false;
