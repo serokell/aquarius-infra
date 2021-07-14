@@ -544,11 +544,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1626296030,
-        "narHash": "sha256-uaLTtkgBjLz5U7Eoqe7scd6OX/EafmsEWPBoZRt5TbQ=",
+        "lastModified": 1626300455,
+        "narHash": "sha256-wri2OBnetJEl3VRpwl4wPK2HCdUMTsD2X1v7R42BF1M=",
         "owner": "serokell",
         "repo": "update-daemon",
-        "rev": "9342950e9f0d7cd8ec6bb4da05524c046fecb733",
+        "rev": "335fc4cbdf5d53cf51ab4a402b281f923b121db2",
         "type": "github"
       },
       "original": {
