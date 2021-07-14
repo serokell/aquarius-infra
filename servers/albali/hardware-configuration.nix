@@ -19,7 +19,10 @@
 
   swapDevices = [ ];
 
-  nix.nrBuildUsers = 24;
+  # Make a lot of build users, because nix-build will fail when they are exhausted.
+  # There is a fix to wait for users to be available instead of failing, but it's not in stable yet:
+  # https://github.com/NixOS/nix/pull/3564
+  nix.nrBuildUsers = 128;
   nix.maxJobs = 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }
