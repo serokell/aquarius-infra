@@ -24,10 +24,12 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1624609732,
-        "narHash": "sha256-8xavmKnNdGa2Lu0kSkLTh4BCyiQvUJfCnlW4mUHBUYo=",
-        "type": "git",
-        "url": "file:///home/balsoft/projects/serokell/deploy-rs"
+        "lastModified": 1625729093,
+        "narHash": "sha256-hpo8T7mlVEpHpZIYqhxqt5i/XY8eu4p66MrAg/MCuVY=",
+        "owner": "serokell",
+        "repo": "deploy-rs",
+        "rev": "587cbcfe8d3ea05c5bb153764d3617012ef28c86",
+        "type": "github"
       },
       "original": {
         "owner": "serokell",
@@ -230,11 +232,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1610392286,
-        "narHash": "sha256-3wFl5y+4YZO4SgRYK8WE7JIS3p0sxbgrGaQ6RMw+d98=",
+        "lastModified": 1622810282,
+        "narHash": "sha256-4wmvM3/xfD0hCdNDIXVzRMfL4yB1J+DjH6Zte2xbAxk=",
         "owner": "nmattia",
         "repo": "naersk",
-        "rev": "d7bfbad3304fd768c0f93a4c3b50976275e6d4be",
+        "rev": "e8061169e1495871b56be97c5c51d310fae01374",
         "type": "github"
       },
       "original": {
@@ -302,11 +304,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1610942247,
-        "narHash": "sha256-PKo1ATAlC6BmfYSRmX0TVmNoFbrec+A5OKcabGEu2yU=",
+        "lastModified": 1622972307,
+        "narHash": "sha256-ENOu0FPCf95iLLoq2txhJtnA2ZpOFhIVBqQVbKM8ra0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "rev": "d8eb97e3801bde96491535f40483d550b57605b9",
         "type": "github"
       },
       "original": {
@@ -495,16 +497,15 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1624616555,
-        "narHash": "sha256-hu91x8D8xfattHIQZZbg7uued+LFipXDksA3C8fQzro=",
+        "lastModified": 1626279626,
+        "narHash": "sha256-DO7B731PMBvOxE5PJyIsU0rYAWbqGuRVKPD+pdYKuSE=",
         "owner": "serokell",
         "repo": "update-daemon",
-        "rev": "b3014d9c6d70795f4a866dfa7d7364b865fa5972",
+        "rev": "800182b9938fb042663c9176c9cfa7ee66e1121c",
         "type": "github"
       },
       "original": {
         "owner": "serokell",
-        "ref": "init",
         "repo": "update-daemon",
         "type": "github"
       }
@@ -530,11 +531,11 @@
     },
     "utils": {
       "locked": {
-        "lastModified": 1610051610,
-        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "lastModified": 1622445595,
+        "narHash": "sha256-m+JRe6Wc5OZ/mKw2bB3+Tl0ZbtyxxxfnAWln8Q5qs+Y=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "rev": "7d706970d94bc5559077eb1a6600afddcd25a7c8",
         "type": "github"
       },
       "original": {

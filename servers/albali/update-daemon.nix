@@ -20,6 +20,33 @@
           aquarius-infra = {};
           gemini-infra = {};
           pegasus-infra = {};
+          bootes-infra = {};
+          cetus-infra = {};
+          common-infra = {};
+          deploy-rs = {};
+          edna = {};
+          gemini-infra = {};
+          ment_licence = {};
+          nix-pandoc = {};
+          pegasus-infra = {};
+          pont = {};
+          pont-sync = {};
+          proton-assurance-initial = {
+            default_branch = "main";
+          };
+          sagittarius-infra = {};
+          serokell-infra = {};
+          serokell-website = {};
+          swampwalk = {};
+          systemd-nix = {};
+          templates = {};
+          test-task-gen-check = {};
+          tezos-infra = {};
+          update-daemon = {};
+          vault-secrets = {};
+        };
+        stakerdao = {
+          bridge-web = {};
         };
       };
     };
