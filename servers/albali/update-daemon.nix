@@ -13,6 +13,8 @@
         eval "$(ssh-agent -s)"
       fi
       cat ${config.vault-secrets.secrets.update-daemon}/private_ssh_key | env SSH_ASKPASS="$(command -v false)" ssh-add -
+      mkdir -p "$HOME/.local/share/nix"
+      echo '"flake-registry":{"https://github.com/serokell/flake-registry/raw/master/flake-registry.json":true}' > "$HOME/.local/share/nix/trusted-settings.json"
     '';
     repos = {
       github = {
